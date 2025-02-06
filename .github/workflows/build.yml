@@ -28,7 +28,7 @@ jobs:
         run: tar -czf retention-app.tar.gz ./build  # Zmienna 'build' to folder, który chcesz spakować
 
       - name: Upload to FTP server
-        uses: SamKirkland/FTP-Deploy-Action@v5
+        uses: SamKirkland/FTP-Deploy-Action@v4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
