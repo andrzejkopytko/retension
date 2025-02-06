@@ -25,7 +25,7 @@ jobs:
         run: npm run build
 
       - name: Package build output
-        run: tar -czf retention-app.tar.gz ./build
+        run: tar -czf retention-app.tar.gz ./dist/retencja
 
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
