@@ -28,10 +28,10 @@ jobs:
         run: tar -czf retention-app.tar.gz ./build  # Zmienna 'build' to folder, który chcesz spakować
 
       - name: Upload to FTP server
-        uses: dawidd6/action-ftp-upload@v3
+        uses: SamKirkland/FTP-Deploy-Action@v5
         with:
-          server: ${{ secrets.FTP_SERVER }}  # Adres FTP
-          username: ${{ secrets.FTP_USERNAME }}  # Nazwa użytkownika FTP
-          password: ${{ secrets.FTP_PASSWORD }}  # Hasło FTP
-          local-file: retention-app.tar.gz  # Nazwa spakowanego pliku
-          remote-dir: /path/to/remote/directory  # Ścieżka docelowa na serwerze FTP
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./retention-app.tar.gz  # Plik, który chcesz wysłać
+          remote-dir: /path/to/remote/directory  # Ścieżka na serwerze FTP
