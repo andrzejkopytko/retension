@@ -25,13 +25,16 @@ jobs:
         run: npm run build
 
       - name: Package build output
-        run: tar -czf retention-app.tar.gz ./build  # Zmienna 'build' to folder, który chcesz spakować
+        run: tar -czf retention-app.tar.gz ./build
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: Upload to FTP server
-        uses: SamKirkland/FTP-Deploy-Action@v4
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./retention-app.tar.gz  # Plik, który chcesz wysłać
-          remote-dir: /path/to/remote/directory  # Ścieżka na serwerze FTP
+        run: |
+          lftp -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }} <<EOF
+          set ssl:verify-certificate no
+          lcd ./
+          put retention-app.tar.gz -o /path/to/remote/directory/retention-app.tar.gz
+          bye
+          EOF
