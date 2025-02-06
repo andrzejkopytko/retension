@@ -24,9 +24,6 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Package build output
-        run: tar -czf retention-app.tar.gz ./dist/retencja
-
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
@@ -34,7 +31,7 @@ jobs:
         run: |
           lftp -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }} <<EOF
           set ssl:verify-certificate no
-          lcd ./
-          put retention-app.tar.gz -o /retention-app.tar.gz
+          lcd ./dist/retencja
+          mirror -R . /path/to/remote/directory/
           bye
           EOF
