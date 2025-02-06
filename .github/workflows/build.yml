@@ -32,6 +32,6 @@ jobs:
           lftp -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }} <<EOF
           set ssl:verify-certificate no
           lcd ./dist/retencja
-          mirror -R . /path/to/remote/directory/
+          mirror -R . /
           bye
           EOF
