@@ -35,6 +35,6 @@ jobs:
           lftp -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }} <<EOF
           set ssl:verify-certificate no
           lcd ./
-          put retention-app.tar.gz -o /path/to/remote/directory/retention-app.tar.gz
+          put retention-app.tar.gz -o /retention-app.tar.gz
           bye
           EOF
